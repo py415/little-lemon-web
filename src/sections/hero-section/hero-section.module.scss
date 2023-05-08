@@ -1,9 +1,9 @@
 .section {
-  @apply flex justify-center bg-primary-green;
+  @apply flex justify-center bg-primary-green px-6;
 }
 
 .img__labels__cntr {
-  @apply md:flex md:justify-between w-[860px] py-16;
+  @apply flex flex-col md:flex-row gap-16 justify-between w-[860px] py-16;
 }
 
 .labels {

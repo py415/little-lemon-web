@@ -1,3 +1,4 @@
+import AboutSection from "@/sections/about-section/about-section";
 import HeroSection from "@/sections/hero-section/hero-section";
 import HighlightSection from "@/sections/highlight-section/highlight-section";
 import TestimonialsSection from "@/sections/testimonials-section/testimonials-section";
@@ -8,6 +9,7 @@ export default function Home() {
       <HeroSection />
       <HighlightSection />
       <TestimonialsSection />
+      <AboutSection />
     </main>
   );
 }

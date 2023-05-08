@@ -1,0 +1,27 @@
+.section {
+  @apply bg-white px-6;
+}
+
+.imgs__labels__cntr {
+  @apply max-w-[860px] flex flex-col md:flex-row mx-auto gap-16 py-16;
+}
+
+.labels {
+  @apply flex-1 flex flex-col gap-2 text-black;
+}
+
+.imgs {
+  @apply relative w-[397px] h-[558px];
+}
+
+.img {
+  @apply w-[265px] h-[372px] aspect-square object-cover rounded-2xl shadow;
+}
+
+.img__a {
+  @apply absolute bottom-0 left-0;
+}
+
+.img__b {
+  @apply absolute top-0 right-0;
+}
