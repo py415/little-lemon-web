@@ -11,14 +11,14 @@ const LeadText = (
   >
 ) => {
   // Props
-  const { children, ...headingProps } = props;
+  const { children, className, ...headingProps } = props;
+  // State
+  const textClasses = [styles.text, karla.className, className].join(" ");
 
   return (
-    <div className={karla.className}>
-      <h4 {...headingProps} className={styles.text}>
-        {children}
-      </h4>
-    </div>
+    <h4 {...headingProps} className={textClasses}>
+      {children}
+    </h4>
   );
 };
 

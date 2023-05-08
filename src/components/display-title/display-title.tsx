@@ -11,14 +11,14 @@ const DisplayTitle = (
   >
 ) => {
   // Props
-  const { children, ...headingProps } = props;
+  const { children, className, ...headingProps } = props;
+  // State
+  const textClasses = [styles.text, markaziText.className, className].join(" ");
 
   return (
-    <div className={markaziText.className}>
-      <h1 {...headingProps} className={styles.text}>
-        {children}
-      </h1>
-    </div>
+    <h1 {...headingProps} className={textClasses}>
+      {children}
+    </h1>
   );
 };
 

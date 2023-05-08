@@ -11,14 +11,14 @@ const Subtitle = (
   >
 ) => {
   // Props
-  const { children, ...headingProps } = props;
+  const { children, className, ...headingProps } = props;
+  // State
+  const textClasses = [styles.text, markaziText.className, className].join(" ");
 
   return (
-    <div className={markaziText.className}>
-      <h2 {...headingProps} className={styles.text}>
-        {children}
-      </h2>
-    </div>
+    <h2 {...headingProps} className={textClasses}>
+      {children}
+    </h2>
   );
 };
 

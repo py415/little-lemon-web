@@ -31,7 +31,7 @@ const NavigationBar = () => {
   ];
 
   return (
-    <nav className="bg-white text-black flex justify-center">
+    <nav className="bg-white text-black flex justify-center py-4">
       <ul className="flex gap-8 items-center max-w-[860px] w-full justify-between">
         <li>
           <Image src="/Logo.svg" alt="logo" width={148} height={40} />

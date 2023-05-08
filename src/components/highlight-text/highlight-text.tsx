@@ -11,14 +11,14 @@ const HighlightText = (
   >
 ) => {
   // Props
-  const { children, ...textProps } = props;
+  const { children, className, ...textProps } = props;
+  // State
+  const textClasses = [styles.text, karla.className, className].join(" ");
 
   return (
-    <div className={karla.className}>
-      <h5 {...textProps} className={styles.text}>
-        {children}
-      </h5>
-    </div>
+    <h5 {...textProps} className={textClasses}>
+      {children}
+    </h5>
   );
 };
 

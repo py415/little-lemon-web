@@ -17,7 +17,7 @@ const NavigationItem = (props: NavigationItemProps) => {
   const { title, href } = item;
 
   return (
-    <li key={title}>
+    <li key={title} className="hover:underline hover:scale-110 transition">
       <Link href={href}>
         <SectionCategories>{title}</SectionCategories>
       </Link>

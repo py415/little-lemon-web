@@ -11,14 +11,14 @@ const ParagraphText = (
   >
 ) => {
   // Props
-  const { children, ...textProps } = props;
+  const { children, className, ...textProps } = props;
+  // State
+  const textClasses = [styles.text, karla.className, className].join(" ");
 
   return (
-    <div className={karla.className}>
-      <p {...textProps} className={styles.text}>
-        {children}
-      </p>
-    </div>
+    <p {...textProps} className={textClasses}>
+      {children}
+    </p>
   );
 };
 

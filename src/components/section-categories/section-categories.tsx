@@ -11,14 +11,14 @@ const SectionCategories = (
   >
 ) => {
   // Props
-  const { children, ...headingProps } = props;
+  const { children, className, ...headingProps } = props;
+  // State
+  const textClasses = [styles.text, karla.className, className].join(" ");
 
   return (
-    <div className={karla.className}>
-      <h5 {...headingProps} className={styles.text}>
-        {children}
-      </h5>
-    </div>
+    <h5 {...headingProps} className={textClasses}>
+      {children}
+    </h5>
   );
 };
 
