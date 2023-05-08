@@ -1,0 +1,11 @@
+.card {
+  @apply flex flex-col items-center gap-2 bg-highlight-light text-black rounded-lg px-4 py-8 text-center;
+}
+
+.icons {
+  @apply flex gap-2 text-primary-yellow;
+}
+
+.img {
+  @apply w-full h-auto object-cover rounded-full aspect-square;
+}

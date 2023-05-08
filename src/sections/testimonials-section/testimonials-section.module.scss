@@ -1,0 +1,11 @@
+.section {
+  @apply justify-center flex flex-col items-center py-16 gap-8 bg-primary-green;
+}
+
+.title {
+  @apply text-primary-yellow;
+}
+
+.tiles {
+  @apply max-w-[860px] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5;
+}
