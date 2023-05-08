@@ -1,0 +1,15 @@
+.section {
+  @apply flex justify-center py-16 bg-white;
+}
+
+.header__tiles__cntr {
+  @apply w-full max-w-[860px] flex flex-col gap-8;
+}
+
+.header {
+  @apply md:flex items-center justify-between text-black;
+}
+
+.tiles {
+  @apply grid gap-4 md:grid-cols-2 lg:grid-cols-3;
+}

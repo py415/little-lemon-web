@@ -1,0 +1,27 @@
+.tile {
+  @apply w-full bg-highlight-light text-black hover:cursor-pointer rounded-t-2xl;
+}
+
+.img {
+  @apply w-full h-[265px] object-cover rounded-t-2xl;
+}
+
+.card {
+  @apply flex flex-col gap-8 px-4 py-8;
+}
+
+.header {
+  @apply flex justify-between;
+}
+
+.price {
+  @apply text-secondary-orange;
+}
+
+.description {
+  @apply text-primary-green;
+}
+
+.caption {
+  @apply flex items-center gap-2;
+}
