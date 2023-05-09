@@ -1,38 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍋 Little Lemon
 
-## Getting Started
+## Table of Contents
+1. [Overview](#Overview)
+2. [Product Specs](#Product-Specs)
+3. [App Preview](#App-Preview)
+4. [Credits](#Credits)
 
-First, run the development server:
+## Overview
+### Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Little Lemon is a web app for the Little Lemon restaurant. Little Lemon, a family-owned Mediterranean gem in the heart of Chicago.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Product Specs
+### User Stories
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- [x] Users shall be able to see a Navigation bar.
+	- [x] Users shall be able to see the Little Lemon logo on the top left of the nav bar.
+	- [x] Users shall be able to see a Home button, that should scroll the user to the top of the page.
+	- [x] Users shall be able to see an About button, that should scroll the user down to the About section of the page.
+	- [x] Users shall be able to see a Menu button.
+	- [x] Users shall be able to see a Reservations button.
+	- [x] Users shall be able to see an Order Online button.
+	- [x] Users shall be able to see a Login button.
+- [x] Users shall be able to see a Hero section that showcases the Little Lemon restaurant.
+	- [x] Users shall be able to see the Little Lemon name.
+	- [x] Users shall be able to see where the restaurant is located.
+	- [x] Users shall be able to see a brief description of the Little Lemon restaurant.
+	- [x] Users shall be able to click a button that redirects you to a page that gives you the option to book a table online.
+- [x] Users shall be able to see a Highlights section showing the week's specials.
+	- [x] Users shall be able to see the heading title (i.e. Specials).
+	- [x] Users shall be able to see an Order Online button on the top right of this section that will redirect the user to the order online page.
+	- [ ] Users shall be able to scroll horizontally to see more dishes in this section.
+	- [x] Users shall be able to see a row of dish tiles.
+		- [ ] Users shall be able to click the dish tile and get redirected to another screen that shows more details about this dish.
+		- [x] Users shall be able to see the name of the dish.
+		- [x] Users shall be able to see the dish description.
+		- [x] Users shall be able to see the price of the dish.
+		- [x] Users shall be able to see the image of the dish.
+- [x] Users shall be able to see a Testimonials section showcasing testimonials.
+	- [x] Users shall be able to see a row of review tiles.
+		- [x] Users shall be able to see the star rating.
+		- [x] Users shall be able to see the user profile image.
+		- [x] Users shall be able to see the review.
+	- [ ] Users shall be able to leave reviews and ratings out of 5 when they have a profile created and are logged in.
+- [x] Users shall be able to see an About section, detailing the Little Lemon restaurant.
+	- [x] Users shall be able to see the name heading of the restaurant.
+	- [x] Users shall be able to see a description of the restaurant.
+	- [x] Users shall be able to see photos of owners, Adrian and Mario.
+- [x] Users shall be able to see a Footer section.
+	- [x] Users shall be able to see the Little Lemon logo on the left side of the footer.
+	- [x] Users shall be able to see doormat navigation (links to other pages).
+	- [x] Users shall be able to see contact details for the restaurant.
+	- [x] Users shall be able to see social media links to the restaurant.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Mockups
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<img src="./mockups/Home Page.png">
+<img src="./mockups/Reserve A Table Form Page.png">
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Credits
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> This is a final capstone project to Meta's Front-End Developer course, check out the full course at [https://www.coursera.org/](https://www.coursera.org/professional-certificates/meta-front-end-developer).
