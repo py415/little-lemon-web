@@ -1,5 +1,6 @@
 import Image from "next/image";
 import NavigationItem, { NavItem } from "../navigation-item/navigation-item";
+import styles from "./navigation-bar.module.scss";
 
 const NavigationBar = () => {
   // Props
@@ -31,13 +32,13 @@ const NavigationBar = () => {
   ];
 
   return (
-    <nav className="bg-white text-black flex justify-center py-4">
-      <ul className="flex gap-8 items-center max-w-[860px] w-full justify-between">
+    <nav className={styles.nav}>
+      <ul className={styles.nav__items__cntr}>
         <li>
           <Image src="/Logo.svg" alt="logo" width={148} height={40} />
         </li>
 
-        <div className="flex gap-8">
+        <div className={styles.nav__items}>
           {NAV_ITEMS.map((item) => (
             <NavigationItem key={item.title} item={item} />
           ))}

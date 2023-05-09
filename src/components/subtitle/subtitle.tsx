@@ -2,7 +2,7 @@ import { Markazi_Text } from "next/font/google";
 import React, { DetailedHTMLProps } from "react";
 import styles from "./subtitle.module.scss";
 
-const markaziText = Markazi_Text({ subsets: ["latin"] });
+const markaziText = Markazi_Text({ weight: "400", subsets: ["latin"] });
 
 const Subtitle = (
   props: DetailedHTMLProps<

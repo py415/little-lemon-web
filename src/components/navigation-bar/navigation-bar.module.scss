@@ -1,0 +1,11 @@
+.nav {
+  @apply bg-white text-black flex justify-center py-4;
+}
+
+.nav__items__cntr {
+  @apply flex gap-8 items-center max-w-[860px] w-full justify-between;
+}
+
+.nav__items {
+  @apply flex gap-8;
+}

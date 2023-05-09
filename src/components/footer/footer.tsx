@@ -4,6 +4,7 @@ import { IconType } from "react-icons";
 import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from "react-icons/fa";
 import HighlightText from "../highlight-text/highlight-text";
 import SectionCategories from "../section-categories/section-categories";
+import styles from "./footer.module.scss";
 
 interface FooterLink {
   icon?: IconType;
@@ -63,11 +64,11 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary-green py-8 flex justify-center px-6">
-      <div className="flex flex-col gap-16 md:flex-row max-w-[860px] justify-between w-full">
-        <div className="bg-white px-4 py-2 rounded-lg h-fit">
+    <footer className={styles.footer}>
+      <div className={styles.logo__items__cntr}>
+        <div className={styles.logo}>
           <Image
-            className="w-[170px] h-[40px] aspect-square object-cover rounded-2xl"
+            className={styles.img}
             src="/Logo.svg"
             alt="logo"
             width="0"
@@ -76,19 +77,16 @@ const Footer = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className={styles.category}>
           <SectionCategories>Navigation</SectionCategories>
 
-          <ul className="flex flex-col gap-2">
+          <ul className={styles.items}>
             {navigationLinks.map((navLink) => {
               const { name, href } = navLink;
 
               return (
                 href && (
-                  <li
-                    key={name}
-                    className="hover:underline hover:scale-105 transition"
-                  >
+                  <li key={name} className={styles.item}>
                     <Link href={href}>
                       <HighlightText>{name}</HighlightText>
                     </Link>
@@ -99,14 +97,13 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className={styles.category}>
           <SectionCategories>Contact</SectionCategories>
 
-          <ul className="flex flex-col gap-2">
+          <ul className={styles.items}>
             <li>
-              <HighlightText>
-                342 Lemon Grove Ave, Chicago, IL 60614
-              </HighlightText>
+              <HighlightText>342 Lemon Grove Ave,</HighlightText>
+              <HighlightText>Chicago, IL 60614</HighlightText>
             </li>
             <li>
               <HighlightText>+1 (312) 555-1212</HighlightText>
@@ -117,10 +114,10 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className={styles.category}>
           <SectionCategories>Socials</SectionCategories>
 
-          <ul className="flex flex-col gap-4">
+          <ul className={styles.items}>
             {socialsLinks.map((socialLink) => {
               const { icon, name, href } = socialLink;
               const Icon = icon;
@@ -128,7 +125,7 @@ const Footer = () => {
               return (
                 Icon &&
                 href && (
-                  <li key={name} className="hover:scale-110 transition">
+                  <li key={name} className={styles.icon}>
                     <Link href={href}>
                       <HighlightText>
                         <Icon />

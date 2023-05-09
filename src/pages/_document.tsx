@@ -1,21 +1,13 @@
-import Footer from "@/components/footer/footer";
-import NavigationBar from "@/components/navigation-bar/navigation-bar";
 import { Head, Html, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
     <Html lang="en">
-      <Head>
-        <title>Little Lemon</title>
-      </Head>
-      <header>
-        <NavigationBar />
-      </header>
+      <Head />
       <body>
         <Main />
         <NextScript />
       </body>
-      <Footer />
     </Html>
   );
 }

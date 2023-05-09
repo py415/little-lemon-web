@@ -1,0 +1,31 @@
+.footer {
+  @apply bg-primary-green py-8 flex justify-center px-6;
+}
+
+.logo__items__cntr {
+  @apply flex flex-col gap-16 md:flex-row max-w-[860px] justify-between w-full;
+}
+
+.logo {
+  @apply bg-white px-4 py-2 rounded-lg h-fit;
+}
+
+.img {
+  @apply w-[170px] h-[40px] aspect-square object-cover rounded-2xl;
+}
+
+.category {
+  @apply flex flex-col gap-4;
+}
+
+.items {
+  @apply flex flex-col gap-2;
+}
+
+.item {
+  @apply hover:underline hover:scale-105 transition;
+}
+
+.icon {
+  @apply hover:scale-110 transition;
+}

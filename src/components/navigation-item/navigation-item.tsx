@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SectionCategories from "../section-categories/section-categories";
+import styles from "./navigation-item.module.scss";
 
 export interface NavItem {
   title: string;
@@ -17,7 +18,7 @@ const NavigationItem = (props: NavigationItemProps) => {
   const { title, href } = item;
 
   return (
-    <li key={title} className="hover:underline hover:scale-110 transition">
+    <li key={title} className={styles.item}>
       <Link href={href}>
         <SectionCategories>{title}</SectionCategories>
       </Link>
