@@ -1,4 +1,5 @@
 import { Head, Html, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
   // State
@@ -18,6 +19,7 @@ export default function Document() {
           content="We are family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist."
         />
         <meta name="og:image" content={ogImageUrl} />
+        <Script src="https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js"></Script>
       </Head>
       <body>
         <Main />

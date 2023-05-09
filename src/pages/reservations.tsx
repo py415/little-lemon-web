@@ -1,16 +1,23 @@
+import { fetchAPI, submitAPI } from "@/api";
 import Button from "@/components/button/button";
 import DisplayTitle from "@/components/display-title/display-title";
 import Subtitle from "@/components/subtitle/subtitle";
 import TextField from "@/components/text-field/text-field";
 import Head from "next/head";
 import { useSnackbar } from "notistack";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Select from "react-select";
 import styles from "./reservations.module.scss";
 
 const Reservations = () => {
   // Hooks
-  const [date, setDate] = useState<string>("");
+  const [timeOptions, setTimeOptions] = useState<
+    {
+      value: string;
+      label: string;
+    }[]
+  >([]);
+  const [date, setDate] = useState<string>(new Date().toISOString());
   const [numOfGuests, setNumOfGuests] = useState<number>(1);
   const [selectedTime, setSelectedTime] = useState<{
     value: string;
@@ -22,46 +29,40 @@ const Reservations = () => {
   } | null>(null);
   const { enqueueSnackbar } = useSnackbar();
   // State
-  const timeOptions = [
-    { value: "06:00", label: "6:00 AM" },
-    { value: "06:30", label: "6:30 AM" },
-    { value: "07:00", label: "7:00 AM" },
-    { value: "07:30", label: "7:30 AM" },
-    { value: "08:00", label: "8:00 AM" },
-    { value: "08:30", label: "8:30 AM" },
-    { value: "09:00", label: "9:00 AM" },
-    { value: "09:30", label: "9:30 AM" },
-    { value: "10:00", label: "10:00 AM" },
-    { value: "10:30", label: "10:30 AM" },
-    { value: "11:00", label: "11:00 AM" },
-    { value: "11:30", label: "11:30 AM" },
-    { value: "12:00", label: "12:00 PM" },
-    { value: "12:30", label: "12:30 PM" },
-    { value: "13:00", label: "1:00 PM" },
-    { value: "13:30", label: "1:30 PM" },
-    { value: "14:00", label: "2:00 PM" },
-    { value: "14:30", label: "2:30 PM" },
-    { value: "15:00", label: "3:00 PM" },
-    { value: "15:30", label: "3:30 PM" },
-    { value: "16:00", label: "4:00 PM" },
-    { value: "16:30", label: "4:30 PM" },
-    { value: "17:00", label: "5:00 PM" },
-    { value: "17:30", label: "5:30 PM" },
-    { value: "18:00", label: "6:00 PM" },
-    { value: "18:30", label: "6:30 PM" },
-    { value: "19:00", label: "7:00 PM" },
-    { value: "19:30", label: "7:30 PM" },
-    { value: "20:00", label: "8:00 PM" },
-    { value: "20:30", label: "8:30 PM" },
-    { value: "21:00", label: "9:00 PM" },
-    { value: "21:30", label: "9:30 PM" },
-    { value: "22:00", label: "10:00 PM" },
-  ];
   const occasionOptions = [
     { value: "birthday", label: "Birthday" },
     { value: "engagement", label: "Engagement" },
     { value: "anniversary", label: "Anniversary" },
   ];
+
+  useEffect(() => {
+    if (date) {
+      const data = fetchAPI(new Date(date));
+      const timeslots = formatTimeslots(data);
+      setTimeOptions(timeslots);
+    }
+  }, [date]);
+
+  const formatTimeslots = (timeslots: string[]) => {
+    return timeslots.map((time) => {
+      const [hourStr, minuteStr] = time.split(":");
+      const hour = parseInt(hourStr, 10);
+      const minute = parseInt(minuteStr, 10);
+
+      const date = new Date();
+      date.setHours(hour, minute);
+
+      const hour12 = date.getHours() % 12 || 12;
+      const amPm = date.getHours() >= 12 ? "PM" : "AM";
+
+      const label = `${hour12}:${minuteStr} ${amPm}`;
+
+      return {
+        value: time,
+        label,
+      };
+    });
+  };
 
   const handleDate = (event: ChangeEvent<HTMLInputElement>) =>
     setDate(event.target.value);
@@ -70,7 +71,7 @@ const Reservations = () => {
     setNumOfGuests(Number(event.target.value));
 
   const reset = () => {
-    setDate("");
+    setDate(new Date().toISOString());
     setNumOfGuests(1);
     setSelectedTime(null);
     setSelectedOccasion(null);
@@ -78,6 +79,13 @@ const Reservations = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    submitAPI({
+      date,
+      selectedTime,
+      numOfGuests,
+      selectedOccasion,
+    });
     reset();
     enqueueSnackbar("Reservation confirmed! We look forward to seeing you!", {
       anchorOrigin: {
@@ -122,6 +130,8 @@ const Reservations = () => {
             onChange={setSelectedTime}
             options={timeOptions}
             name="time"
+            id="time"
+            instanceId="time"
           />
 
           <TextField
@@ -149,6 +159,8 @@ const Reservations = () => {
             onChange={setSelectedOccasion}
             options={occasionOptions}
             name="occasion"
+            id="occasion"
+            instanceId="occasion"
           />
 
           <div className={styles.btn__cntr}>
