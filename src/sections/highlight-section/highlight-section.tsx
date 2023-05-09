@@ -32,7 +32,7 @@ const HighlightSection = () => {
   ];
 
   return (
-    <section className={styles.section}>
+    <section id="highlight" className={styles.section}>
       <div className={styles.header__tiles__cntr}>
         <div className={styles.header}>
           <DisplayTitle>This weeks specials!</DisplayTitle>

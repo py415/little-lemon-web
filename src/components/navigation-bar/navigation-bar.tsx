@@ -2,6 +2,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import { NAV_ITEMS } from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import NavigationItem from "../navigation-item/navigation-item";
@@ -12,6 +13,37 @@ const NavigationBar = () => {
   // Hooks
   const isMediumScreen = useMediaQuery("md");
   const [open, setOpen] = useState<boolean>(false);
+  const router = useRouter();
+  // State
+  const navigationItems =
+    router.pathname === "/"
+      ? NAV_ITEMS
+      : [
+          {
+            title: "Home",
+            href: "/",
+          },
+          {
+            title: "About",
+            href: "/",
+          },
+          {
+            title: "Menu",
+            href: "/",
+          },
+          {
+            title: "Reservations",
+            href: "/reservations",
+          },
+          {
+            title: "Order Online",
+            href: "/",
+          },
+          {
+            title: "Login",
+            href: "/",
+          },
+        ];
 
   const handleOpen = () => setOpen(true);
 
@@ -36,7 +68,7 @@ const NavigationBar = () => {
 
         {isMediumScreen ? (
           <div className={styles.nav__items}>
-            {NAV_ITEMS.map((item) => (
+            {navigationItems.map((item) => (
               <NavigationItem key={item.title} item={item} />
             ))}
           </div>

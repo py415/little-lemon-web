@@ -7,11 +7,11 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     title: "About",
-    href: "/about",
+    href: "#about",
   },
   {
     title: "Menu",
-    href: "/menu",
+    href: "#highlight",
   },
   {
     title: "Reservations",
@@ -19,10 +19,10 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     title: "Order Online",
-    href: "/order-online",
+    href: "/",
   },
   {
     title: "Login",
-    href: "/login",
+    href: "/",
   },
 ];

@@ -15,7 +15,7 @@ const HeroSection = () => {
   const handleClick = () => router.push("/reservations");
 
   return (
-    <section className={styles.section}>
+    <section id="hero" className={styles.section}>
       <div className={styles.img__labels__cntr}>
         <div className={styles.labels}>
           <DisplayTitle className={styles.title}>Little Lemon</DisplayTitle>

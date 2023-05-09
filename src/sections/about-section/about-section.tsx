@@ -10,7 +10,7 @@ const AboutSection = () => {
   const imgBStyles = [styles.img, styles.img__b].join(" ");
 
   return (
-    <section className={styles.section}>
+    <section id="about" className={styles.section}>
       <div className={styles.imgs__labels__cntr}>
         <div className={styles.labels}>
           <DisplayTitle>Little Lemon</DisplayTitle>

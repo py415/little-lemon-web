@@ -7,6 +7,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
           content="Little Lemon is a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist."

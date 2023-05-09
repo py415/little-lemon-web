@@ -34,7 +34,7 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className={styles.section}>
+    <section id="testimonials" className={styles.section}>
       <DisplayTitle className={styles.title}>Testimonials</DisplayTitle>
 
       <div className={styles.tiles}>
