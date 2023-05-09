@@ -9,10 +9,10 @@ const Button = (
   >
 ) => {
   // Props
-  const { children } = props;
+  const { children, ...buttonProps } = props;
 
   return (
-    <button className={styles.btn}>
+    <button {...buttonProps} className={styles.btn}>
       <SectionCategories>{children}</SectionCategories>
     </button>
   );

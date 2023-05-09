@@ -1,48 +1,47 @@
+import useMediaQuery from "@/hooks/useMediaQuery";
+import { NAV_ITEMS } from "@/utils/constants";
 import Image from "next/image";
-import NavigationItem, { NavItem } from "../navigation-item/navigation-item";
+import { useState } from "react";
+import { FaBars } from "react-icons/fa";
+import NavigationItem from "../navigation-item/navigation-item";
+import Sidebar from "../sidebar/sidebar";
 import styles from "./navigation-bar.module.scss";
 
 const NavigationBar = () => {
-  // Props
-  const NAV_ITEMS: NavItem[] = [
-    {
-      title: "Home",
-      href: "/",
-    },
-    {
-      title: "About",
-      href: "/about",
-    },
-    {
-      title: "Menu",
-      href: "/menu",
-    },
-    {
-      title: "Reservations",
-      href: "/reservations",
-    },
-    {
-      title: "Order Online",
-      href: "/order-online",
-    },
-    {
-      title: "Login",
-      href: "/login",
-    },
-  ];
+  // Hooks
+  const isMediumScreen = useMediaQuery("md");
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpen = () => setOpen(true);
 
   return (
     <nav className={styles.nav}>
       <ul className={styles.nav__items__cntr}>
+        {!isMediumScreen && (
+          <a onClick={handleOpen} className={styles.sidebar__icon}>
+            <li>
+              <FaBars />
+            </li>
+          </a>
+        )}
+
+        <Sidebar open={open} setOpen={setOpen} />
+
         <li>
           <Image src="/Logo.svg" alt="logo" width={148} height={40} />
         </li>
 
-        <div className={styles.nav__items}>
-          {NAV_ITEMS.map((item) => (
-            <NavigationItem key={item.title} item={item} />
-          ))}
-        </div>
+        {isMediumScreen ? (
+          <div className={styles.nav__items}>
+            {NAV_ITEMS.map((item) => (
+              <NavigationItem key={item.title} item={item} />
+            ))}
+          </div>
+        ) : (
+          <li className={styles.icon}>
+            <FaBars />
+          </li>
+        )}
       </ul>
     </nav>
   );

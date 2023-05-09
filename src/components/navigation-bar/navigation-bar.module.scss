@@ -1,5 +1,5 @@
 .nav {
-  @apply bg-white text-black flex justify-center py-4;
+  @apply bg-white text-black flex justify-center py-4 px-6;
 }
 
 .nav__items__cntr {
@@ -8,4 +8,12 @@
 
 .nav__items {
   @apply flex gap-8;
+}
+
+.sidebar__icon {
+  @apply hover:bg-primary-green p-2 rounded-full hover:text-white transition text-primary-green hover:cursor-pointer;
+}
+
+.icon {
+  @apply opacity-0;
 }

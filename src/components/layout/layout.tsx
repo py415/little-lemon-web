@@ -15,6 +15,7 @@ const Layout = (props: LayoutProps) => {
       <header>
         <NavigationBar />
       </header>
+
       <main>{children}</main>
       <Footer />
     </>
