@@ -1,0 +1,35 @@
+.reservations {
+  @apply min-h-screen bg-primary-green py-16 text-white;
+}
+
+.form {
+  @apply max-w-[400px] flex flex-col gap-4 mx-auto;
+}
+
+.title {
+  @apply text-primary-yellow text-center;
+}
+
+.subtitle {
+  @apply text-center;
+}
+
+.select__control {
+  @apply bg-highlight-light px-4 py-8 rounded-lg text-primary-green;
+}
+
+.select__menu {
+  @apply bg-highlight-light p-0 rounded-none;
+}
+
+.select__option--focused {
+  @apply bg-primary-green px-4 py-8 border-primary-green border-dotted border-b-2;
+}
+
+.select__option {
+  @apply bg-highlight-light text-primary-green px-4 py-8 border-primary-green border-dotted border-b-2;
+}
+
+.btn__cntr {
+  @apply mx-auto;
+}

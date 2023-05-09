@@ -1,4 +1,3 @@
-import Layout from "@/components/layout/layout";
 import AboutSection from "@/sections/about-section/about-section";
 import HeroSection from "@/sections/hero-section/hero-section";
 import HighlightSection from "@/sections/highlight-section/highlight-section";
@@ -7,7 +6,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Little Lemon</title>
       </Head>
@@ -16,6 +15,6 @@ export default function Home() {
       <HighlightSection />
       <TestimonialsSection />
       <AboutSection />
-    </Layout>
+    </>
   );
 }

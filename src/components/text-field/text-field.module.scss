@@ -1,0 +1,7 @@
+.text__field {
+  @apply flex flex-col gap-2;
+}
+
+.input {
+  @apply bg-highlight-light px-4 py-8 rounded-lg text-primary-green;
+}
