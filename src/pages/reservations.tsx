@@ -11,13 +11,15 @@ import styles from "./reservations.module.scss";
 
 const Reservations = () => {
   // Hooks
+  const currentDate = new Date().toISOString().substring(0, 10);
   const [timeOptions, setTimeOptions] = useState<
     {
       value: string;
       label: string;
     }[]
   >([]);
-  const [date, setDate] = useState<string>(new Date().toISOString());
+  const [name, setName] = useState("");
+  const [date, setDate] = useState<string>(currentDate);
   const [numOfGuests, setNumOfGuests] = useState<number>(1);
   const [selectedTime, setSelectedTime] = useState<{
     value: string;
@@ -64,6 +66,9 @@ const Reservations = () => {
     });
   };
 
+  const handleName = (event: ChangeEvent<HTMLInputElement>) =>
+    setName(event.target.value);
+
   const handleDate = (event: ChangeEvent<HTMLInputElement>) =>
     setDate(event.target.value);
 
@@ -108,11 +113,22 @@ const Reservations = () => {
           <Subtitle className={styles.subtitle}>Reserve a table</Subtitle>
 
           <TextField
+            type="text"
+            placeholder="Name"
+            label="Name"
+            name="name"
+            value={name}
+            onChange={handleName}
+          />
+
+          <TextField
             type="date"
             placeholder="Date"
             label="Date"
             name="date"
             value={date}
+            defaultValue={date}
+            min={currentDate}
             onChange={handleDate}
           />
 
@@ -139,7 +155,7 @@ const Reservations = () => {
             min="1"
             max="20"
             placeholder="Number of guests"
-            label="Number of guests"
+            label="Number of guests (20 max)"
             name="num-of-guests"
             value={numOfGuests}
             onChange={handleNumOfDiners}
