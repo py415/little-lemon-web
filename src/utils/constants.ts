@@ -23,6 +23,6 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     title: "Login",
-    href: "/",
+    href: "/login",
   },
 ];

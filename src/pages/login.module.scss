@@ -1,0 +1,19 @@
+.login {
+  @apply min-h-screen bg-primary-green py-16 text-white;
+}
+
+.form {
+  @apply max-w-[400px] flex flex-col gap-4 mx-auto;
+}
+
+.btn__cntr {
+  @apply mx-auto my-8;
+}
+
+.registration__cta {
+  @apply mx-auto;
+}
+
+.registration__link {
+  @apply text-primary-yellow font-semibold;
+}

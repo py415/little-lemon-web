@@ -41,7 +41,7 @@ const NavigationBar = () => {
           },
           {
             title: "Login",
-            href: "/",
+            href: "/login",
           },
         ];
 
