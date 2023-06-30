@@ -26,8 +26,4 @@ export const NAV_ITEMS: NavItem[] = [
     title: "Order Online",
     href: "/",
   },
-  {
-    title: "Login",
-    href: "/login",
-  },
 ];

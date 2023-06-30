@@ -26,14 +26,16 @@ interface User {
 }
 
 interface AuthContextType {
-  authToken?: AuthToken;
-  setAuthToken: Dispatch<SetStateAction<AuthToken>>;
-  user?: User;
-  setUser: Dispatch<SetStateAction<User>>;
+  authToken: AuthToken | null;
+  setAuthToken: Dispatch<SetStateAction<AuthToken | null>>;
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
+  authToken: null,
   setAuthToken: () => {},
+  user: null,
   setUser: () => {},
 });
 
@@ -47,8 +49,8 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   // Props
   const { children } = props;
   // Hooks
-  const [authToken, setAuthToken] = useState<AuthToken>();
-  const [user, setUser] = useState<User>();
+  const [authToken, setAuthToken] = useState<AuthToken | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -66,7 +68,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     () => ({
       authToken,
       setAuthToken,
-      user: user,
+      user,
       setUser,
     }),
     [authToken, user]

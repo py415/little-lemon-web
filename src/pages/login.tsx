@@ -5,6 +5,7 @@ import { LOGIN_API } from "@/utils/constants";
 import jwt_decode from "jwt-decode";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import styles from "./login.module.scss";
@@ -15,6 +16,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const clear = () => {
     setUsername("");
@@ -44,13 +46,14 @@ const Login = () => {
           setUser(jwt_decode(data.access));
           localStorage.setItem("authTokens", JSON.stringify(data));
           clear();
-          enqueueSnackbar("Submit clicked", {
+          enqueueSnackbar("Success! You are now logged in.", {
             anchorOrigin: {
               horizontal: "center",
               vertical: "top",
             },
             variant: "success",
           });
+          router.push("/");
         }
       })
       .catch((error) => {

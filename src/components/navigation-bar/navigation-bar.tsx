@@ -1,3 +1,4 @@
+import { useAuth } from "@/contexts/AuthContext";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { NAV_ITEMS } from "@/utils/constants";
 import Image from "next/image";
@@ -6,6 +7,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import NavigationItem from "../navigation-item/navigation-item";
+import SectionCategories from "../section-categories/section-categories";
 import Sidebar from "../sidebar/sidebar";
 import styles from "./navigation-bar.module.scss";
 
@@ -14,6 +16,7 @@ const NavigationBar = () => {
   const isMediumScreen = useMediaQuery("md");
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
+  const { user, setAuthToken, setUser } = useAuth();
   // State
   const navigationItems =
     router.pathname === "/"
@@ -38,10 +41,6 @@ const NavigationBar = () => {
           {
             title: "Order Online",
             href: "/",
-          },
-          {
-            title: "Login",
-            href: "/login",
           },
         ];
 
@@ -71,6 +70,27 @@ const NavigationBar = () => {
             {navigationItems.map((item) => (
               <NavigationItem key={item.title} item={item} />
             ))}
+
+            {user ? (
+              <li
+                className={styles.item}
+                onClick={() => {
+                  localStorage.removeItem("authTokens");
+                  setAuthToken(null);
+                  setUser(null);
+                }}
+              >
+                <SectionCategories>Logout</SectionCategories>
+              </li>
+            ) : (
+              <NavigationItem
+                key="Login"
+                item={{
+                  title: "Login",
+                  href: "/login",
+                }}
+              />
+            )}
           </div>
         ) : (
           <li className={styles.icon}>

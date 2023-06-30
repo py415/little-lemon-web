@@ -17,3 +17,7 @@
 .icon {
   @apply opacity-0;
 }
+
+.item {
+  @apply hover:underline hover:scale-110 transition cursor-pointer;
+}
