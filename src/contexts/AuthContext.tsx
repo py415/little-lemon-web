@@ -1,3 +1,4 @@
+import { User } from "@/interfaces/User.interface";
 import jwt_decode from "jwt-decode";
 import {
   createContext,
@@ -16,25 +17,16 @@ interface AuthToken {
   refresh: string;
 }
 
-interface User {
-  exp: number;
-  iat: number;
-  jti: string;
-  token_type: string;
-  user_id: number;
-  username: string;
-}
-
 interface AuthContextType {
-  authToken: AuthToken | null;
-  setAuthToken: Dispatch<SetStateAction<AuthToken | null>>;
+  authTokens: AuthToken | null;
+  setAuthTokens: Dispatch<SetStateAction<AuthToken | null>>;
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
-  authToken: null,
-  setAuthToken: () => {},
+  authTokens: null,
+  setAuthTokens: () => {},
   user: null,
   setUser: () => {},
 });
@@ -49,7 +41,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   // Props
   const { children } = props;
   // Hooks
-  const [authToken, setAuthToken] = useState<AuthToken | null>(null);
+  const [authTokens, setAuthTokens] = useState<AuthToken | null>(null);
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -58,7 +50,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
       const data = item ? JSON.parse(item) : null;
 
       if (data) {
-        setAuthToken(data);
+        setAuthTokens(data);
         setUser(jwt_decode(data.access));
       }
     }
@@ -66,12 +58,12 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
 
   const contextValue = useMemo(
     () => ({
-      authToken,
-      setAuthToken,
+      authTokens,
+      setAuthTokens,
       user,
       setUser,
     }),
-    [authToken, user]
+    [authTokens, user]
   ) as AuthContextType;
 
   return (

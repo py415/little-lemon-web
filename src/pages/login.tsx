@@ -2,6 +2,7 @@ import Button from "@/components/button/button";
 import TextField from "@/components/text-field/text-field";
 import { AuthContext } from "@/contexts/AuthContext";
 import { LOGIN_API } from "@/utils/constants";
+import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Head from "next/head";
 import Link from "next/link";
@@ -12,7 +13,7 @@ import styles from "./login.module.scss";
 
 const Login = () => {
   // Hooks
-  const { setAuthToken, setUser } = useContext(AuthContext);
+  const { setAuthTokens, setUser } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { enqueueSnackbar } = useSnackbar();
@@ -32,17 +33,17 @@ const Login = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    fetch(LOGIN_API, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
+    const data = {
+      username,
+      password,
+    };
+
+    axios
+      .post(LOGIN_API, data)
+      .then((response) => {
+        const data = response.data;
         if (data) {
-          setAuthToken(data);
+          setAuthTokens(data);
           setUser(jwt_decode(data.access));
           localStorage.setItem("authTokens", JSON.stringify(data));
           clear();

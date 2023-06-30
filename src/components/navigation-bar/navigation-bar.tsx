@@ -16,7 +16,7 @@ const NavigationBar = () => {
   const isMediumScreen = useMediaQuery("md");
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
-  const { user, setAuthToken, setUser } = useAuth();
+  const { user, setAuthTokens, setUser } = useAuth();
   // State
   const navigationItems =
     router.pathname === "/"
@@ -46,6 +46,12 @@ const NavigationBar = () => {
 
   const handleOpen = () => setOpen(true);
 
+  const handleLogout = () => {
+    localStorage.removeItem("authTokens");
+    setAuthTokens(null);
+    setUser(null);
+  };
+
   return (
     <nav className={styles.nav}>
       <ul className={styles.nav__items__cntr}>
@@ -72,14 +78,7 @@ const NavigationBar = () => {
             ))}
 
             {user ? (
-              <li
-                className={styles.item}
-                onClick={() => {
-                  localStorage.removeItem("authTokens");
-                  setAuthToken(null);
-                  setUser(null);
-                }}
-              >
+              <li className={styles.item} onClick={handleLogout}>
                 <SectionCategories>Logout</SectionCategories>
               </li>
             ) : (
