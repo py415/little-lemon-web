@@ -42,6 +42,7 @@ const Login = () => {
       .post(LOGIN_API, data)
       .then((response) => {
         const data = response.data;
+
         if (data) {
           setAuthTokens(data);
           setUser(jwt_decode(data.access));

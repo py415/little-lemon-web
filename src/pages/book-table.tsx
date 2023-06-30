@@ -1,8 +1,10 @@
-import { fetchAPI, submitAPI } from "@/api";
+import { fetchAPI } from "@/api";
 import Button from "@/components/button/button";
 import DisplayTitle from "@/components/display-title/display-title";
 import Subtitle from "@/components/subtitle/subtitle";
 import TextField from "@/components/text-field/text-field";
+import useAxios from "@/hooks/useAxios";
+import { BOOKING_API } from "@/utils/constants";
 import Head from "next/head";
 import { useSnackbar } from "notistack";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -19,17 +21,18 @@ const BookTable = () => {
     }[]
   >([]);
   const [name, setName] = useState("");
-  const [date, setDate] = useState<string>(currentDate);
-  const [numOfGuests, setNumOfGuests] = useState<number>(1);
+  const [bookingDate, setBookingDate] = useState<string>(currentDate);
   const [selectedTime, setSelectedTime] = useState<{
     value: string;
     label: string;
   } | null>(null);
+  const [numOfGuests, setNumOfGuests] = useState<number>(1);
   const [selectedOccasion, setSelectedOccasion] = useState<{
     value: string;
     label: string;
   } | null>(null);
   const { enqueueSnackbar } = useSnackbar();
+  const api = useAxios();
   // State
   const occasionOptions = [
     { value: "birthday", label: "Birthday" },
@@ -38,12 +41,12 @@ const BookTable = () => {
   ];
 
   useEffect(() => {
-    if (date) {
-      const data = fetchAPI(new Date(date));
+    if (bookingDate) {
+      const data = fetchAPI(new Date(bookingDate));
       const timeslots = formatTimeslots(data);
       setTimeOptions(timeslots);
     }
-  }, [date]);
+  }, [bookingDate]);
 
   const formatTimeslots = (timeslots: string[]) => {
     return timeslots.map((time) => {
@@ -70,35 +73,57 @@ const BookTable = () => {
     setName(event.target.value);
 
   const handleDate = (event: ChangeEvent<HTMLInputElement>) =>
-    setDate(event.target.value);
+    setBookingDate(event.target.value);
 
   const handleNumOfDiners = (event: ChangeEvent<HTMLInputElement>) =>
     setNumOfGuests(Number(event.target.value));
 
   const reset = () => {
-    setDate(new Date().toISOString());
+    setBookingDate(new Date().toISOString());
     setNumOfGuests(1);
     setSelectedTime(null);
     setSelectedOccasion(null);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    submitAPI({
-      date,
-      selectedTime,
-      numOfGuests,
-      selectedOccasion,
-    });
-    reset();
-    enqueueSnackbar("Reservation confirmed! We look forward to seeing you!", {
-      anchorOrigin: {
-        horizontal: "center",
-        vertical: "top",
-      },
-      variant: "success",
-    });
+    const data = {
+      name,
+      no_of_guests: numOfGuests,
+      booking_date: bookingDate,
+      booking_time: selectedTime?.value,
+      occasion: selectedOccasion?.label,
+    };
+
+    api
+      .post(BOOKING_API, data)
+      .then((response) => {
+        const data = response.data;
+
+        if (data) {
+          reset();
+          enqueueSnackbar(
+            "Reservation confirmed! We look forward to seeing you!",
+            {
+              anchorOrigin: {
+                horizontal: "center",
+                vertical: "top",
+              },
+              variant: "success",
+            }
+          );
+        }
+      })
+      .catch((error) => {
+        enqueueSnackbar(error.message, {
+          anchorOrigin: {
+            horizontal: "center",
+            vertical: "top",
+          },
+          variant: "error",
+        });
+      });
   };
 
   return (
@@ -126,8 +151,8 @@ const BookTable = () => {
             placeholder="Date"
             label="Date"
             name="date"
-            value={date}
-            defaultValue={date}
+            value={bookingDate}
+            defaultValue={bookingDate}
             min={currentDate}
             onChange={handleDate}
           />
