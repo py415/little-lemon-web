@@ -1,4 +1,4 @@
-import { User } from "@/interfaces/User.interface";
+import { JWTUser } from "@/interfaces/JWTUser";
 import jwt_decode from "jwt-decode";
 import {
   createContext,
@@ -20,8 +20,8 @@ interface AuthToken {
 interface AuthContextType {
   authTokens: AuthToken | null;
   setAuthTokens: Dispatch<SetStateAction<AuthToken | null>>;
-  user: User | null;
-  setUser: Dispatch<SetStateAction<User | null>>;
+  user: JWTUser | null;
+  setUser: Dispatch<SetStateAction<JWTUser | null>>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -42,7 +42,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   const { children } = props;
   // Hooks
   const [authTokens, setAuthTokens] = useState<AuthToken | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<JWTUser | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

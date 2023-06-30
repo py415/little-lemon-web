@@ -1,4 +1,3 @@
-import Button from "@/components/button/button";
 import DisplayTitle from "@/components/display-title/display-title";
 import HighlightTile, {
   Dish,
@@ -36,7 +35,7 @@ const HighlightSection = () => {
       <div className={styles.header__tiles__cntr}>
         <div className={styles.header}>
           <DisplayTitle>This weeks specials!</DisplayTitle>
-          <Button>Online Menu</Button>
+          {/* <Button>Online Menu</Button> */}
         </div>
 
         <ul className={styles.tiles}>

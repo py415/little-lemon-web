@@ -7,9 +7,9 @@ import Head from "next/head";
 import { useSnackbar } from "notistack";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Select from "react-select";
-import styles from "./reservations.module.scss";
+import styles from "./book-table.module.scss";
 
-const Reservations = () => {
+const BookTable = () => {
   // Hooks
   const currentDate = new Date().toISOString().substring(0, 10);
   const [timeOptions, setTimeOptions] = useState<
@@ -190,4 +190,4 @@ const Reservations = () => {
   );
 };
 
-export default Reservations;
+export default BookTable;

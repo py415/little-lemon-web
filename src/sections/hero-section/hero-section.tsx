@@ -1,3 +1,4 @@
+import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Button from "../../components/button/button";
@@ -11,8 +12,9 @@ const HeroSection = () => {
   const heroImg = "/restauranfood.jpg";
   // Hooks
   const router = useRouter();
+  const { user } = useAuth();
 
-  const handleClick = () => router.push("/reservations");
+  const handleClick = () => router.push("/book-table");
 
   return (
     <section id="hero" className={styles.section}>
@@ -24,7 +26,11 @@ const HeroSection = () => {
             We are family owned Mediterranean restaurant, focused on traditional
             recipes served with a modern twist.
           </LeadText>
-          <Button onClick={handleClick}>Reserve a Table</Button>
+          {user && (
+            <div className={styles.btn__cntr}>
+              <Button onClick={handleClick}>Reserve a Table</Button>
+            </div>
+          )}
         </div>
 
         <Image

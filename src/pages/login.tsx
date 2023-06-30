@@ -107,6 +107,8 @@ const Login = () => {
           </div>
         </form>
       </div>
+
+      <hr />
     </>
   );
 };

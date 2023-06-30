@@ -35,13 +35,17 @@ const NavigationBar = () => {
             href: "/",
           },
           {
-            title: "Reservations",
-            href: "/reservations",
+            title: "My Reservations",
+            href: "/my-reservations",
           },
           {
-            title: "Order Online",
-            href: "/",
+            title: "Book Table",
+            href: "/book-table",
           },
+          // {
+          //   title: "Order Online",
+          //   href: "/",
+          // },
         ];
 
   const handleOpen = () => setOpen(true);
@@ -73,9 +77,12 @@ const NavigationBar = () => {
 
         {isMediumScreen ? (
           <div className={styles.nav__items}>
-            {navigationItems.map((item) => (
-              <NavigationItem key={item.title} item={item} />
-            ))}
+            {navigationItems.map((item) => {
+              if (item.href === "/my-reservations" && !user) return;
+              if (item.href === "/book-table" && !user) return;
+
+              return <NavigationItem key={item.title} item={item} />;
+            })}
 
             {user ? (
               <li className={styles.item} onClick={handleLogout}>

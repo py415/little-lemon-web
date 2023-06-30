@@ -9,10 +9,10 @@ const Button = (
   >
 ) => {
   // Props
-  const { children, ...buttonProps } = props;
+  const { children, className, ...buttonProps } = props;
 
   return (
-    <button {...buttonProps} className={styles.btn}>
+    <button {...buttonProps} className={[styles.btn, className].join(" ")}>
       <SectionCategories>{children}</SectionCategories>
     </button>
   );

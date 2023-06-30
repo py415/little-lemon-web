@@ -1,0 +1,31 @@
+.my__reservations {
+  @apply min-h-screen bg-primary-green py-16 text-white;
+}
+
+.reservations {
+  @apply max-w-[400px] flex flex-col gap-4 mx-auto;
+}
+
+.title {
+  @apply text-primary-yellow text-center;
+}
+
+.subtitle {
+  @apply text-center;
+}
+
+.tiles {
+  @apply flex flex-col gap-8;
+}
+
+.tile {
+  @apply bg-highlight-light rounded-2xl px-8 py-12 text-highlight-dark flex flex-col gap-2 shadow;
+}
+
+.btn__cntr {
+  @apply flex justify-between mt-4;
+}
+
+.hr {
+  @apply mt-16;
+}

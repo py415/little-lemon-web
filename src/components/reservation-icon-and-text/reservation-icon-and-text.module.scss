@@ -1,0 +1,7 @@
+.text__and__icon {
+  @apply flex items-center justify-between;
+}
+
+.icon {
+  @apply bg-primary-green w-fit p-2 rounded-full text-white;
+}

@@ -1,5 +1,5 @@
 import { AuthContext } from "@/contexts/AuthContext";
-import { User } from "@/interfaces/User.interface";
+import { JWTUser } from "@/interfaces/JWTUser";
 import { API_URL } from "@/utils/constants";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -17,14 +17,14 @@ const useAxios = () => {
   });
 
   axiosInstance.interceptors.request.use(async (request) => {
-    const user = jwt_decode(authTokens!.access) as User;
+    const user = jwt_decode(authTokens!.access) as JWTUser;
     const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
 
     if (!isExpired) {
       return request;
     }
 
-    const response = await axios.post(`${baseURL}/api/token/refresh`, {
+    const response = await axios.post(`${baseURL}/api/token/refresh/`, {
       refresh: authTokens?.refresh,
     });
 

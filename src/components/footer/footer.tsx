@@ -1,3 +1,4 @@
+import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
 import { IconType } from "react-icons";
@@ -13,6 +14,8 @@ interface FooterLink {
 }
 
 const Footer = () => {
+  // Hooks
+  const { user } = useAuth();
   // State
   const navigationLinks: FooterLink[] = [
     {
@@ -21,20 +24,24 @@ const Footer = () => {
     },
     {
       name: "About",
-      href: "/about",
+      href: "#about",
     },
     {
       name: "Menu",
-      href: "/menu",
+      href: "#highlight",
     },
     {
-      name: "Reservations",
-      href: "/reservations",
+      name: "My Reservations",
+      href: "/my-reservations",
     },
     {
-      name: "Order Online",
-      href: "/order-online",
+      name: "Book Table",
+      href: "/book-table",
     },
+    // {
+    //   name: "Order Online",
+    //   href: "/order-online",
+    // },
     {
       name: "Login",
       href: "/login",
@@ -83,6 +90,9 @@ const Footer = () => {
           <ul className={styles.items}>
             {navigationLinks.map((navLink) => {
               const { name, href } = navLink;
+
+              if (href === "/my-reservations" && !user) return;
+              if (href === "/book-table" && !user) return;
 
               return (
                 href && (
