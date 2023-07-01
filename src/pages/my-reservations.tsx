@@ -3,18 +3,21 @@ import DisplayTitle from "@/components/display-title/display-title";
 import ReservationIconAndText from "@/components/reservation-icon-and-text/reservation-icon-and-text";
 import Subtitle from "@/components/subtitle/subtitle";
 import { useAuth } from "@/contexts/AuthContext";
+import { useBookings } from "@/contexts/BookingsContext";
 import useAxios from "@/hooks/useAxios";
 import { Booking } from "@/interfaces/Booking.interface";
 import { BOOKING_API } from "@/utils/constants";
 import { format, parseISO } from "date-fns";
+import dayjs from "dayjs";
 import Head from "next/head";
 import { useSnackbar } from "notistack";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   FaBirthdayCake,
   FaCalendar,
   FaCalendarDay,
   FaClock,
+  FaIdBadge,
   FaIdCard,
   FaRing,
   FaUsers,
@@ -24,10 +27,31 @@ import styles from "./my-reservations.module.scss";
 
 const MyReservations = () => {
   // Hooks
-  const [reservations, setReservations] = useState<Booking[]>([]);
   const { authTokens } = useAuth();
+  const { bookings, setBookings } = useBookings();
   const api = useAxios();
   const { enqueueSnackbar } = useSnackbar();
+
+  const fetchBookings = () => {
+    return api
+      .get<Booking[]>(BOOKING_API)
+      .then((response) => {
+        const data = response.data;
+
+        if (data) {
+          setBookings(data);
+        }
+      })
+      .catch((error) => {
+        enqueueSnackbar(error.message, {
+          anchorOrigin: {
+            horizontal: "center",
+            vertical: "top",
+          },
+          variant: "error",
+        });
+      });
+  };
 
   const getOccasionIcon = (occasion: string) => {
     switch (occasion) {
@@ -71,36 +95,33 @@ const MyReservations = () => {
     });
   };
 
-  const handleCancel = () => {
-    enqueueSnackbar("Cancel reservation coming soon", {
-      anchorOrigin: {
-        horizontal: "center",
-        vertical: "top",
-      },
-      variant: "info",
-    });
+  const handleCancel = (reservationId: number) => {
+    api
+      .delete(`${BOOKING_API}${reservationId}`)
+      .then(() => {
+        enqueueSnackbar("Successfully canceled reservation!", {
+          anchorOrigin: {
+            horizontal: "center",
+            vertical: "top",
+          },
+          variant: "success",
+        });
+        fetchBookings();
+      })
+      .catch((error) => {
+        enqueueSnackbar(error.message, {
+          anchorOrigin: {
+            horizontal: "center",
+            vertical: "top",
+          },
+          variant: "error",
+        });
+      });
   };
 
   useEffect(() => {
     if (authTokens) {
-      api
-        .get<Booking[]>(BOOKING_API)
-        .then((response) => {
-          const data = response.data;
-
-          if (data) {
-            setReservations(data);
-          }
-        })
-        .catch((error) => {
-          enqueueSnackbar(error.message, {
-            anchorOrigin: {
-              horizontal: "center",
-              vertical: "top",
-            },
-            variant: "error",
-          });
-        });
+      fetchBookings();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authTokens]);
@@ -116,7 +137,7 @@ const MyReservations = () => {
         <Subtitle className={styles.subtitle}>My Reservations</Subtitle>
 
         <ul className={styles.tiles}>
-          {reservations.map((reservation) => {
+          {bookings.map((booking) => {
             const {
               booking_date,
               booking_time,
@@ -124,10 +145,20 @@ const MyReservations = () => {
               name,
               no_of_guests,
               occasion,
-            } = reservation;
+            } = booking;
+            const isExpired = dayjs(booking_date).diff(dayjs(), "day") < 0;
 
             return (
-              <li key={id} className={styles.tile}>
+              <li
+                key={id}
+                className={[styles.tile, isExpired && "opacity-75"].join(" ")}
+              >
+                <ReservationIconAndText
+                  title="Reservation ID"
+                  description={id.toString()}
+                  icon={FaIdBadge}
+                />
+
                 <ReservationIconAndText
                   title="Date"
                   description={formatDate(booking_date)}
@@ -159,15 +190,18 @@ const MyReservations = () => {
                 />
 
                 <div className={styles.btn__cntr}>
-                  <Button onClick={handleEdit}>Edit</Button>
-                  <Button onClick={handleCancel}>Cancel</Button>
+                  <Button disabled={isExpired} onClick={handleEdit}>
+                    Edit
+                  </Button>
+                  <Button disabled={isExpired} onClick={() => handleCancel(id)}>
+                    Cancel
+                  </Button>
                 </div>
               </li>
             );
           })}
         </ul>
       </div>
-
       <hr className={styles.hr} />
     </div>
   );
