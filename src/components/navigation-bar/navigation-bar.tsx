@@ -35,8 +35,8 @@ const NavigationBar = () => {
             href: "/",
           },
           {
-            title: "My Reservations",
-            href: "/my-reservations",
+            title: "Reservations",
+            href: "/reservations",
           },
           {
             title: "Book Table",
@@ -78,7 +78,7 @@ const NavigationBar = () => {
         {isMediumScreen ? (
           <div className={styles.nav__items}>
             {navigationItems.map((item) => {
-              if (item.href === "/my-reservations" && !user) return;
+              if (item.href === "/reservations" && !user) return;
               if (item.href === "/book-table" && !user) return;
 
               return <NavigationItem key={item.title} item={item} />;

@@ -152,7 +152,6 @@ const BookTable = () => {
             label="Date"
             name="date"
             value={bookingDate}
-            defaultValue={bookingDate}
             min={currentDate}
             onChange={handleDate}
           />

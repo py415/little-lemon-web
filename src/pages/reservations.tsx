@@ -23,9 +23,9 @@ import {
   FaUsers,
   FaWineGlass,
 } from "react-icons/fa";
-import styles from "./my-reservations.module.scss";
+import styles from "./reservations.module.scss";
 
-const MyReservations = () => {
+const Reservations = () => {
   // Hooks
   const { authTokens } = useAuth();
   const { bookings, setBookings } = useBookings();
@@ -127,12 +127,12 @@ const MyReservations = () => {
   }, [authTokens]);
 
   return (
-    <div className={styles.my__reservations}>
+    <div className={styles.reservations}>
       <Head>
         <title>My Reservations | Little Lemon</title>
       </Head>
 
-      <div className={styles.reservations}>
+      <div className={styles.feed}>
         <DisplayTitle className={styles.title}>Little Lemon</DisplayTitle>
         <Subtitle className={styles.subtitle}>My Reservations</Subtitle>
 
@@ -189,14 +189,9 @@ const MyReservations = () => {
                   icon={getOccasionIcon(occasion)}
                 />
 
-                <div className={styles.btn__cntr}>
-                  <Button disabled={isExpired} onClick={handleEdit}>
-                    Edit
-                  </Button>
-                  <Button disabled={isExpired} onClick={() => handleCancel(id)}>
-                    Cancel
-                  </Button>
-                </div>
+                {!isExpired && (
+                  <Button onClick={() => handleCancel(id)}>Cancel</Button>
+                )}
               </li>
             );
           })}
@@ -207,4 +202,4 @@ const MyReservations = () => {
   );
 };
 
-export default MyReservations;
+export default Reservations;

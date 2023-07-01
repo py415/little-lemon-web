@@ -31,8 +31,8 @@ const Footer = () => {
       href: "#highlight",
     },
     {
-      name: "My Reservations",
-      href: "/my-reservations",
+      name: "Reservations",
+      href: "/reservations",
     },
     {
       name: "Book Table",
@@ -91,7 +91,7 @@ const Footer = () => {
             {navigationLinks.map((navLink) => {
               const { name, href } = navLink;
 
-              if (href === "/my-reservations" && !user) return;
+              if (href === "/reservations" && !user) return;
               if (href === "/book-table" && !user) return;
 
               return (

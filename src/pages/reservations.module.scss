@@ -1,8 +1,8 @@
-.my__reservations {
+.reservations {
   @apply min-h-screen bg-primary-green py-16 text-white;
 }
 
-.reservations {
+.feed {
   @apply max-w-[400px] flex flex-col gap-4 mx-auto;
 }
 
